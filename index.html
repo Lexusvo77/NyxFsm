@@ -1123,6 +1123,23 @@ onclick="sendOrder()">
 ENVIAR INFORMACIÓN DEL PEDIDO
 </button>
 
+ <br>
+
+<input
+type="file"
+id="paymentProof"
+accept="image/*">
+
+<br><br>
+
+<button
+class="btn"
+style="width:100%"
+type="button"
+onclick="sendProofToInstagram()">
+ENVIAR COMPROBANTE A INSTAGRAM
+</button>
+ 
 </div>
 </div>
 
@@ -1705,7 +1722,7 @@ let settings={
  heroText:"Descubre nuestra selección de productos con diseños exclusivos y una experiencia de compra moderna.",
  promoTitle:"PROMOCIONES ESPECIALES",
  promoText:"Descubre nuestros productos y novedades.",
- instagram:"https://www.instagram.com/6.Nyx.77/",
+ instagram:"https://www.instagram.com/nf_nyx/",
  tiktok:"https://www.tiktok.com/",
  contact:"Escríbenos para obtener información.",
  heroBackground:"",
@@ -2632,6 +2649,19 @@ function openCheckout(){
 
 }
 
+ function sendOrder(){
+
+  const instagram = "https://www.instagram.com/nf_nyx/";
+
+  window.open(instagram, "_blank");
+
+}
+
+ function sendProofToInstagram(){
+  const instagram = "https://www.instagram.com/nf_nyx/";
+  window.open(instagram, "_blank");
+}
+ 
 function payRecurrente(){
 
  const raw=
