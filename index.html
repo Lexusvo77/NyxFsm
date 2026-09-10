@@ -2649,13 +2649,66 @@ function openCheckout(){
 
 }
 
- function sendOrder(){
+ async function sendOrder(){
 
-  const instagram = "https://www.instagram.com/nf_nyx/";
+  const name =
+    document.getElementById("customerName").value.trim();
 
-  window.open(instagram, "_blank");
+  const phone =
+    document.getElementById("customerPhone").value.trim();
 
-}
+  const address =
+    document.getElementById("customerAddress").value.trim();
+
+  if(!name || !phone || !address){
+    showToast("Completa nombre, teléfono y dirección.");
+    return;
+  }
+
+  let total = 0;
+  let productsText = "";
+
+  for(const item of cart){
+
+    const p = products.find(
+      x => Number(x.id) === Number(item.id)
+    );
+
+    if(!p) continue;
+
+    const quantity = Number(item.quantity || 1);
+    const price = Number(p.price || 0);
+    const subtotal = price * quantity;
+
+    total += subtotal;
+
+    productsText +=
+      `- ${p.name} x${quantity} — Q${subtotal.toFixed(2)}\n`;
+  }
+
+  const message =
+`🛍️ PEDIDO NYX
+
+Nombre: ${name}
+Teléfono: ${phone}
+Dirección: ${address}
+
+PRODUCTOS:
+${productsText}
+TOTAL: Q${total.toFixed(2)}`;
+
+  try{
+    await navigator.clipboard.writeText(message);
+    showToast("Pedido copiado. Abriendo Instagram...");
+  }catch(e){
+    showToast("No se pudo copiar automáticamente.");
+  }
+
+  window.open(
+    "https://www.instagram.com/nf_nyx/",
+    "_blank"
+  );
+ }
 
  function sendProofToInstagram(){
   const instagram = "https://www.instagram.com/nf_nyx/";
